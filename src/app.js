@@ -9,7 +9,7 @@ const { httpSaveVideo, httpGetUserUpload } = require('./controllers/video.contro
 
 
 app.use(cors({
-	origin: 'http://localhost:3000',
+	origin: 'https://intense-eyrie-93047.herokuapp.com',
 }));
 
 app.use(morgan('combined'));
