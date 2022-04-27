@@ -9,7 +9,7 @@ const { httpSaveVideo, httpGetUserUpload } = require('./controllers/video.contro
 
 
 app.use(cors({
-	origin: 'https://intense-eyrie-93047.herokuapp.com',
+	origin: 'https://video-collection-fe.vercel.app',
 }));
 
 app.use(morgan('combined'));
