@@ -24,6 +24,13 @@ const videoSchema = new mongoose.Schema({
 	damaged: {
 		type: Boolean,
 		required: true
+	},
+	status: {
+		approved: {
+			type: Boolean,
+			default: false
+		},
+		message: []
 	}
 }, { timestamps: true });
 

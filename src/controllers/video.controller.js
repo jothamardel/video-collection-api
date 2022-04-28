@@ -4,7 +4,6 @@ const videoDatabase = require('../model/video.model');
 async function httpSaveVideo(req, res) {
 	try {
 		const video = {...req.body};
-		console.log(video);
 		if (
 			!video.user||
 			!video.video_url ||
@@ -36,6 +35,12 @@ async function httpSaveVideo(req, res) {
 		exist.car_brand = video.car_brand;
 		exist.car_model = video.car_model;
 		exist.damaged = video.damaged;
+		exist.status = {
+			approved: video.status.approved,
+			message: [...video.status.message]
+		}
+
+		console.log(exist);
 
 		exist.save();
 
@@ -90,6 +95,25 @@ async function httpGetAllUpload(req, res) {
 		})
 	}
 }
+
+// async function httpGetAllUpload(req, res) {
+// 	try {
+// 		const videos = await videoDatabase.find();
+
+// 		return res.status(200).json({
+// 			message: "User uploads successfully",
+// 			success: true,
+// 			data: videos
+// 		})
+		
+// 	} catch (error) {
+// 		return res.status(404).json({
+// 			message: 'unable to fetch uploads',
+// 			success: false,
+// 			data: []
+// 		})
+// 	}
+// }
 
 
 module.exports = {
