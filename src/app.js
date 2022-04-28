@@ -5,12 +5,14 @@ const path = require('path');
 const app = express();
 
 const { httpCreateUserAccount, httpUserLogin } = require('./controllers/user.controller');
-const { httpSaveVideo, httpGetUserUpload } = require('./controllers/video.controller');
+const { httpSaveVideo, httpGetUserUpload, httpGetAllUpload } = require('./controllers/video.controller');
 
 
-app.use(cors({
-	origin: 'https://video-collection-fe.vercel.app',
-}));
+// app.use(cors({
+// 	origin: 'https://video-collection-fe.vercel.app',
+// }));
+
+app.use(cors());
 
 app.use(morgan('combined'));
 
@@ -28,6 +30,10 @@ app.post('/login', async (req, res) => {
 
 app.post('/upload', async (req, res) => {
 	await httpSaveVideo(req, res);
+})
+
+app.get('/upload/all', async (req, res) => {
+	await httpGetAllUpload(req, res);
 })
 
 app.get('/upload/:id', async (req, res) => {

@@ -72,8 +72,28 @@ async function httpGetUserUpload(req, res) {
 	}
 }
 
+async function httpGetAllUpload(req, res) {
+	try {
+		const videos = await videoDatabase.find();
+
+		return res.status(200).json({
+			message: "User uploads successfully",
+			success: true,
+			data: videos
+		})
+		
+	} catch (error) {
+		return res.status(404).json({
+			message: 'unable to fetch uploads',
+			success: false,
+			data: []
+		})
+	}
+}
+
 
 module.exports = {
 	httpSaveVideo,
-	httpGetUserUpload
+	httpGetUserUpload,
+	httpGetAllUpload
 }
