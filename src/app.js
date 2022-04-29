@@ -6,7 +6,7 @@ const app = express();
 
 const { httpCreateUserAccount, httpUserLogin, httpGetAllUsers, httpGetSingleUser } = require('./controllers/user.controller');
 const { httpSaveVideo, httpGetUserUpload, httpGetAllUpload } = require('./controllers/video.controller');
-
+const { httpGetAllPayments, httpGetSinglePayment, httpPostPayment } = require('./controllers/payment.controller');
 
 // app.use(cors({
 // 	origin: 'https://video-collection-fe.vercel.app',
@@ -46,6 +46,14 @@ app.get('/users', async (req, res) => {
 
 app.get('/user/:id', async (req, res) => {
 	await httpGetSingleUser(req, res);
+})
+
+app.post('/paid', async (req, res) => {
+	await httpPostPayment(req, res);
+})
+
+app.get('/paid/:id', async (req, res) => {
+	await httpGetSinglePayment(req, res);
 })
 
 // app.use(express.static(process.cwd() + '/public'));
