@@ -78,7 +78,52 @@ async function httpUserLogin (req, res) {
 }
 
 
+async function httpGetAllUsers(req, res) {
+	try {
+		const users = await userDatabase.find();
+		return res.status(200).json({
+			message: "Successful",
+			success: true,
+			data: users
+		})
+	} catch (error) {
+		return res.status(400).json({
+			message: 'Unable to get users',
+			success: false,
+		})
+	}
+}
+
+
+async function httpGetSingleUser(req, res) {
+	try {
+		const { id } = req.params
+		const user = await userDatabase.findById(id);
+
+		if(!user) {
+			return res.status(404).json({
+				message: 'User not found!',
+				success: false
+			})
+		}
+
+		return res.status(200).json({
+			message: "Successful",
+			success: true,
+			data: user
+		})
+	} catch (error) {
+		return res.status(400).json({
+			message: 'Unable to get user',
+			success: false,
+		})
+	}
+}
+
+
 module.exports = {
 	httpCreateUserAccount,
-	httpUserLogin
+	httpUserLogin,
+	httpGetAllUsers,
+	httpGetSingleUser
 }

@@ -4,7 +4,7 @@ const morgan = require('morgan');
 const path = require('path');
 const app = express();
 
-const { httpCreateUserAccount, httpUserLogin } = require('./controllers/user.controller');
+const { httpCreateUserAccount, httpUserLogin, httpGetAllUsers, httpGetSingleUser } = require('./controllers/user.controller');
 const { httpSaveVideo, httpGetUserUpload, httpGetAllUpload } = require('./controllers/video.controller');
 
 
@@ -38,6 +38,14 @@ app.get('/upload/all', async (req, res) => {
 
 app.get('/upload/:id', async (req, res) => {
 	await httpGetUserUpload(req, res);
+})
+
+app.get('/users', async (req, res) => {
+	await httpGetAllUsers(req, res);
+})
+
+app.get('/user/:id', async (req, res) => {
+	await httpGetSingleUser(req, res);
 })
 
 // app.use(express.static(process.cwd() + '/public'));
